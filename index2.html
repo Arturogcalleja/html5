@@ -1,0 +1,326 @@
+<html>
+<head>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+    var x = 240;
+	var y = 240;
+$(document).ready(inicio);
+function inicio() {
+    setTimeout("dibujar()",100);
+	 setTimeout("dibujar()",500);
+	$("#archivo").change(archivo)
+	$("#efectos").change(efectos)
+	
+}
+function archivo(){
+		if($(this).val()=="nuevo"){
+		//alert("nuevo")
+		var canvas = document.getElementById("lienzo");
+	    var contexto =canvas.getContext("2d");
+		contexto.clearRect(0,0,300,300);
+		}
+	if($(this).val()=="abrir"){
+		//alert("abrir");
+		$("body").append("<form method='POST' action='upload.php' enctype='mulytipart/form-data'><input type='file' name='archivo'><input type='submit'></form>")
+		}	
+		if($(this).val()=="guardar"){
+		//alert("abrir");
+		var canvas = document.getElementById("lienzo");
+	    var contexto =canvas.getContext("2d");
+	    window.location= canvas.toDataURL("image/png");
+		}	
+	}
+	function reconocimientovocal(){
+		if($(this).val()=="aclarar"){
+		
+		var canvas = document.getElementById("lienzo");
+	    var contexto =canvas.getContext("2d");
+		var imageData = contexto.getImageData(0,0,500,500)
+	    var data = imageData.data;
+		   for (var i=0;i<data.length;i+=4){
+		data[i]=data[i]+100;
+		data[i+1]=data[i+1]+100;
+		data[i+2]=data[i+2]+100;
+		}
+		contexto.putImageData(imageData,0,0)
+		}
+		if($(this).val()=="oscurecer"){
+		
+		var canvas = document.getElementById("lienzo");
+	    var contexto =canvas.getContext("2d");
+		var imageData = contexto.getImageData(0,0,500,500)
+	    var data = imageData.data;
+		   for (var i=0;i<data.length;i+=4){
+		data[i]=data[i]-100;
+		data[i+1]=data[i+1]-100;
+		data[i+2]=data[i+2]-100;
+		}
+		contexto.putImageData(imageData,0,0)
+		}
+		if($(this).val()=="escalagrises"){
+		
+		var canvas = document.getElementById("lienzo");
+	    var contexto =canvas.getContext("2d");
+		var imageData = contexto.getImageData(0,0,500,500)
+	    var data = imageData.data;
+		   for (var i=0;i<data.length;i+=4){
+		data[i]=(data[i]+data[i+1] + data[i+2])/3;
+		data[i+1]=(data[i]+data[i+1] + data[i+2])/3;
+		data[i+2]=(data[i]+data[i+1] + data[i+2])/3;
+		}
+		contexto.putImageData(imageData,0,0)
+		}
+		if($(this).val()=="solarizar"){
+		
+		var canvas = document.getElementById("lienzo");
+	    var contexto =canvas.getContext("2d");
+		var imageData = contexto.getImageData(0,0,500,500)
+	    var data = imageData.data;
+		   for (var i=0;i<data.length;i+=4){
+		if(data[i] < 122){data[i+1]=0}else{data[i+1]=255};
+		if(data[i] < 122){data[i+2]=0}else{data[i+2]=255};
+		if(data[i] < 122){data[i+2]=0}else{data[i+2]=255};
+		}
+		contexto.putImageData(imageData,0,0)
+		}
+		}
+function efectos(){
+	if($(this).val()=="negativo"){
+		
+		var canvas = document.getElementById("lienzo");
+	    var contexto =canvas.getContext("2d");
+		var imageData = contexto.getImageData(0,0,500,500)
+	    var data = imageData.data;
+		   for (var i=0;i<data.length;i+=4){
+		        data[i]=255 -data[i];
+		        data[i+1]=255 - data[i+1];
+		        data[i+2]=255 - data[i+2];
+		}
+		contexto.putImageData(imageData,0,0)
+		}
+		if($(this).val()=="aclarar"){
+		
+		var canvas = document.getElementById("lienzo");
+	    var contexto =canvas.getContext("2d");
+		var imageData = contexto.getImageData(0,0,500,500)
+	    var data = imageData.data;
+		   for (var i=0;i<data.length;i+=4){
+		data[i]=data[i]+100;
+		data[i+1]=data[i+1]+100;
+		data[i+2]=data[i+2]+100;
+		}
+		contexto.putImageData(imageData,0,0)
+		}
+		if($(this).val()=="oscurecer"){
+		
+		var canvas = document.getElementById("lienzo");
+	    var contexto =canvas.getContext("2d");
+		var imageData = contexto.getImageData(0,0,500,500)
+	    var data = imageData.data;
+		   for (var i=0;i<data.length;i+=4){
+		data[i]=data[i]-100;
+		data[i+1]=data[i+1]-100;
+		data[i+2]=data[i+2]-100;
+		}
+		contexto.putImageData(imageData,0,0)
+		}
+		if($(this).val()=="escalagrises"){
+		
+		var canvas = document.getElementById("lienzo");
+	    var contexto =canvas.getContext("2d");
+		var imageData = contexto.getImageData(0,0,500,500)
+	    var data = imageData.data;
+		   for (var i=0;i<data.length;i+=4){
+		data[i]=(data[i]+data[i+1] + data[i+2])/3;
+		data[i+1]=(data[i]+data[i+1] + data[i+2])/3;
+		data[i+2]=(data[i]+data[i+1] + data[i+2])/3;
+		}
+		contexto.putImageData(imageData,0,0)
+		}
+		if($(this).val()=="solarizar"){
+		
+		var canvas = document.getElementById("lienzo");
+	    var contexto =canvas.getContext("2d");
+		var imageData = contexto.getImageData(0,0,500,500)
+	    var data = imageData.data;
+		   for (var i=0;i<data.length;i+=4){
+		if(data[i] < 122){data[i+1]=0}else{data[i+1]=255};
+		if(data[i] < 122){data[i+2]=0}else{data[i+2]=255};
+		if(data[i] < 122){data[i+2]=0}else{data[i+2]=255};
+		}
+		contexto.putImageData(imageData,0,0)
+		}
+		if($(this).val()=="desenfocar"){
+		
+		var canvas = document.getElementById("lienzo");
+	    var contexto =canvas.getContext("2d");
+		var imageData = contexto.getImageData(0,0,300,300)
+	    var data = imageData.data;
+		   for (var i=0;i<data.length;i+=4){
+		     var radio=20;
+			 var temp;
+			 for(var componente=0;componente<3;componente++){
+				 temp=0;
+				 for(var x=0;x<=(radio*4);x+=4){
+					 for(var y=0;y<=(radio*1200);y+=1200){
+						 temp += data[i +componente+x+y];
+						 }
+					 }
+					 data[i+componente]=temp/(radio*radio);
+					 }
+		}
+		contexto.putImageData(imageData,0,0)
+		}
+	}	
+function dibujar(){
+	
+	var canvas = document.getElementById("lienzo");
+	var contexto =canvas.getContext("2d");
+	
+	var img = new Image();
+	img.src = "imagenes/inicial.jpg"
+	contexto.drawImage(img,10,10);
+	
+	var imageData = contexto.getImageData(0,0,500,500)
+	var data = imageData.data;
+	
+	/*for (var i=0;i<data.length;i+=4){
+		data[i]=255 -data[i];
+		data[i+1]=255 - data[i+1];
+		data[i+2]=255 - data[i+2];
+		}
+		for (var i=0;i<data.length;i+=4){
+		data[i]=data[i]+100;
+		data[i+1]=data[i+1]+100;
+		data[i+2]=data[i+2]+100;
+		}
+		for (var i=0;i<data.length;i+=4){
+		data[i]=data[i]-100;
+		data[i+1]=data[i+1]-100;
+		data[i+2]=data[i+2]-100;
+		}
+		for (var i=0;i<data.length;i+=4){
+		data[i]=data[i]-100;
+		data[i+1]=data[i+1]-100;
+		data[i+2]=data[i+2]-100;
+		}*/
+		contexto.putImageData(imageData,0,0)
+	}
+</script>
+<style type="text/css">
+   canvas{
+	   border:1px solid black;
+	   float:left;
+	   background:white;}
+   #herramientas{
+	   width:50px;
+	   height:300px;
+	   border:1px solid black;
+	   float:left;
+	   background:grey;
+	   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b8e1fc+0,a9d2f3+10,90bae4+25,90bcea+37,90bff0+50,6ba8e5+51,a2daf5+83,bdf3fd+100;Blue+Gloss+%231 */
+background: #b8e1fc; /* Old browsers */
+background: -moz-linear-gradient(top, #b8e1fc 0%, #a9d2f3 10%, #90bae4 25%, #90bcea 37%, #90bff0 50%, #6ba8e5 51%, #a2daf5 83%, #bdf3fd 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8e1fc', endColorstr='#bdf3fd',GradientType=0 ); /* IE6-9 */}
+   #dialogos{
+	   width:200px;
+	   height:300px;
+	   border:1px solid black;
+	   float:left;
+	   background:grey;
+	   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b8e1fc+0,a9d2f3+10,90bae4+25,90bcea+37,90bff0+50,6ba8e5+51,a2daf5+83,bdf3fd+100;Blue+Gloss+%231 */
+background: #b8e1fc; /* Old browsers */
+background: -moz-linear-gradient(top, #b8e1fc 0%, #a9d2f3 10%, #90bae4 25%, #90bcea 37%, #90bff0 50%, #6ba8e5 51%, #a2daf5 83%, #bdf3fd 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8e1fc', endColorstr='#bdf3fd',GradientType=0 ); /* IE6-9 */}
+	nav {
+		width:550px;
+		height:22px;
+		background:grey;
+		padding:3px 3px 3px 3px;
+		margin-bottom:2px;
+		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b8e1fc+0,a9d2f3+10,90bae4+25,90bcea+37,90bff0+50,6ba8e5+51,a2daf5+83,bdf3fd+100;Blue+Gloss+%231 */
+background: #b8e1fc; /* Old browsers */
+background: -moz-linear-gradient(top, #b8e1fc 0%, #a9d2f3 10%, #90bae4 25%, #90bcea 37%, #90bff0 50%, #6ba8e5 51%, #a2daf5 83%, #bdf3fd 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8e1fc', endColorstr='#bdf3fd',GradientType=0 ); /* IE6-9 */}
+	select{
+		background:grey;
+		color:white;
+		padding:0px;
+		margin:0px;
+		border:0px solid white;}	  
+	#contenedor{
+		margin:auto;}
+	body{
+		background:grey;
+		font-family:Arial, Helvetica, sans-serif;}	
+	footer{
+		background:grey;
+		margin-top:302px;
+		padding:3px;
+		color:white;;
+		font-size:8px;
+		width:549px;
+		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b8e1fc+0,a9d2f3+10,90bae4+25,90bcea+37,90bff0+50,6ba8e5+51,a2daf5+83,bdf3fd+100;Blue+Gloss+%231 */
+background: #b8e1fc; /* Old browsers */
+background: -moz-linear-gradient(top, #b8e1fc 0%, #a9d2f3 10%, #90bae4 25%, #90bcea 37%, #90bff0 50%, #6ba8e5 51%, #a2daf5 83%, #bdf3fd 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8e1fc', endColorstr='#bdf3fd',GradientType=0 ); /* IE6-9 */}
+.herramienta{
+	width:45px;
+	height:45px;
+	border:0px solid black;
+	margin-bottom:3px;
+	margin-left:1px;
+	box-shadow:0px 0px 10px rgba(0,0,0,0,0,5);
+	border-radius:5px;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b8e1fc+0,a9d2f3+10,90bae4+25,90bcea+37,90bff0+50,6ba8e5+51,a2daf5+83,bdf3fd+100;Blue+Gloss+%231 */
+background: #b8e1fc; /* Old browsers */
+background: -moz-linear-gradient(top, #b8e1fc 0%, #a9d2f3 10%, #90bae4 25%, #90bcea 37%, #90bff0 50%, #6ba8e5 51%, #a2daf5 83%, #bdf3fd 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8e1fc', endColorstr='#bdf3fd',GradientType=0 ); /* IE6-9 */}	 
+	   </style>
+</head>
+<body>
+
+<div id="contenedor">
+<nav>
+<select id="archivo">
+	<option  value="" title="arturo">Archivo</option>
+    <option value="nuevo">Nuevo</option>
+    <option value="abrir">Abrir</option>
+    <option value="guardar">guardar</option>
+    <option value="cerrar">Cerrar</option>
+</select>
+<select id="efectos">
+	<option value="">Efectos</option>
+    <option value="negativo">Negativo</option>
+    <option value="aclarar">Aclarar</option>
+    <option value="oscurecer">Oscurecer</option>
+    <option value="escalagrises">Escala de grises</option>
+    <option value="solarizar">solarizar</option>
+    <option value="desenfocar">Desenfocar</option>
+</select>
+<input type="text" x-webkit-speech>
+</nav>
+<br>
+<div id="herramientas">
+   <div class="herramienta"></div>
+   <div class="herramienta"></div>
+   <div class="herramienta"></div>
+   <div class="herramienta"></div>
+</div>
+<canvas id="lienzo" width="300px" height="300px"></canvas>
+<div id="dialogos"></div>
+<footer>Copyright -(C) arturo gonzalez</footer>
+</div>
+</body>
+</html>
+
